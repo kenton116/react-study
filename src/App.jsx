@@ -30,28 +30,52 @@ function Todo() {
     setItems(newItems);
   };
 
-  return (
-    <div className="panel">
-      <div className="panel-heading">
-        やることリスト
+  if (displayItems.length === 0) {
+    return (
+      <div className="panel">
+        <div className="panel-heading">
+          やることリスト
+        </div>
+        <Input onAdd={handleAdd} />
+        <Filter
+          onChange={handleFilterChange}
+          value={filter}
+        />
+        <div className="has-text-centered">
+          タスクがありません
+        </div>
+        <div className="panel-block">
+          {displayItems.length} 個のタスク
+        </div>
       </div>
-      <Input onAdd={handleAdd} />
-      <Filter
-        onChange={handleFilterChange}
-        value={filter}
-      />
-      {displayItems.map(item => (
-        <TodoItem
-          key={item.text}
-          item={item}
-          onCheck={handleCheck}
-         />
-      ))}
-      <div className="panel-block">
-        {displayItems.length} 個のタスク
+    )
+  } else {
+    return (
+      <div className="panel">
+        <div className="panel-heading">
+          やることリスト
+        </div>
+        <Input onAdd={handleAdd} />
+        <Filter
+          onChange={handleFilterChange}
+          value={filter}
+        />
+        {displayItems.map(item => (
+          <div>
+            <TodoItem
+            key={item.text}
+            item={item}
+            onCheck={handleCheck}
+            />
+          </div>
+        ))}
+        <div className="panel-block">
+          {displayItems.length} 個のタスク
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
+
 }
 
 function Input({ onAdd }) {
@@ -66,16 +90,29 @@ function Input({ onAdd }) {
     }
   };
 
+  const handleClick = e => {
+    if (text !== "") {
+      onAdd(text);
+      setText('');
+
+    }
+  }
+
   return (
     <div className="panel-block">
       <input
-        class="input"
+        className="input"
         type="text"
         placeholder="エンターキーで追加"
         value={text}
         onChange={handleChange}
         onKeyDown={handleKeyDown}
       />
+      <button
+        className="button is-info"
+        type="button"
+        onClick={handleClick}
+      >追加</button>
     </div>
   );
 }

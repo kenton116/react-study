@@ -1,5 +1,5 @@
 {
-  "name": "my-app",
+  "name": "react-study",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -10,6 +10,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
+    "sqlite3": "^5.1.6",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -35,5 +36,12 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "devDependencies": {
+    "@types/sqlite3": "^3.1.9"
+  },
+  "main": "index.js",
+  "repository": "git@github.com:kenton116/react-study.git",
+  "author": "kenton116 <kento_nakamura@outlook.com>",
+  "license": "MIT"
 }
